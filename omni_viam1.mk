@@ -15,9 +15,9 @@
 #
 
 $(call inherit-product, vendor/omni/config/common.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/target/product/embedded.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/embedded.mk)
 
-$(call inherit-product, $(SRC_TARGET_DIR)/target/product/languages_small.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_small.mk)
 
 PRODUCT_DEVICE       := viam1
 PRODUCT_NAME         := omni_viam1
