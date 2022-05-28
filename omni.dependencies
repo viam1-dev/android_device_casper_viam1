@@ -1,0 +1,8 @@
+[
+  {
+    "remote":"viam1-dev",
+    "repository": "android_kernel_casper_viam1",
+    "target_path": "kernel/casper/viam1",
+    "revision":"master"
+  }
+]
