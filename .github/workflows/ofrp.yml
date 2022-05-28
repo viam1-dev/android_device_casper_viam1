@@ -25,7 +25,8 @@ jobs:
           cd ~/OFRP
 
           mkdir ~/.bin
-          curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/.bin/repo
+          sudo curl http://commondatastorage.googleapis.com/git-repo-downloads/repo | sudo tee /usr/bin/repo > /dev/zero
+          sudo chmod 777 /usr/bin/repo
           python3 ~/.bin/repo init --depth=1 -u https://github.com/OrangeFoxRecovery/fox-6.0_manifest.git -b fox_6.0
           python3 ~/.bin/repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all)
           git clone --branch omni-6.0 --single-branch https://github.com/viam1-dev/android_device_casper_viam1.git ~/OFRP/device/casper/viam1
@@ -40,12 +41,12 @@ jobs:
           export OF_LEGACY_SHAR512=1
           export OF_DISABLE_KEYMASTER2=1
           export LC_ALL=C
-          export PATH=$HOME/.bin/repo:$PATH
           lunch omni_viam1-eng
+          repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all)
           make -j$(nproc --all) recoveryimage
 
       - name: Uploading OFRP builds
         uses: actions/upload-artifact@v2
         with:
-          name: OFRP
+          name: OFRP_viam1
           path: /home/runner/OFRP/out/target/product/viam1/recovery.*

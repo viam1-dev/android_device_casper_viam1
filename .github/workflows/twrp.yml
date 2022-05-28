@@ -37,14 +37,12 @@ jobs:
           source build/envsetup.sh
           export ALLOW_MISSING_DEPENDENCIES=true
           export LC_ALL=C
-          export PATH=$HOME/.bin/repo:$PATH
           lunch omni_viam1-eng
           repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all)
-          lunch omni_viam1-eng
           make -j$(nproc --all) recoveryimage
 
       - name: Uploading TWRP builds
         uses: actions/upload-artifact@v2
         with:
-          name: twrp
+          name: TWRP_viam1
           path: /home/runner/TWRP/out/target/product/viam1/recovery.*
