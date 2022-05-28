@@ -57,7 +57,6 @@ BOARD_MKBOOTIMG_ARGS    += --kernel_offset $(BOARD_KERNEL_OFFSET)
 BOARD_MKBOOTIMG_ARGS    += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS    += --second_offset $(BOARD_SECOND_OFFSET)
 BOARD_MKBOOTIMG_ARGS    += --tags_offset $(BOARD_TAGS_OFFSET)
-BOARD_CUSTOM_BOOTIMG_MK := $(LOCAL_PATH)/mkbootimg.mk
 
 # Logging
 TARGET_USES_LOGD    := true
