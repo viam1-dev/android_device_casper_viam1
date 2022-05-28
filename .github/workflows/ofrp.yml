@@ -40,6 +40,7 @@ jobs:
           export OF_LEGACY_SHAR512=1
           export OF_DISABLE_KEYMASTER2=1
           export LC_ALL=C
+          export PATH=$HOME/.bin/repo:$PATH
           lunch omni_viam1-eng
           make -j$(nproc --all) recoveryimage
 
