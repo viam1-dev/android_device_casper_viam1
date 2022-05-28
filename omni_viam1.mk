@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2017 The Android Open-Source Project
+# Copyright (C) 2022 TeamWin Recovery Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,12 +15,12 @@
 #
 
 $(call inherit-product, vendor/omni/config/common.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/embedded.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/target/product/embedded.mk)
 
-# Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := viam1
-PRODUCT_NAME := omni_viam1
-PRODUCT_BRAND := casper
-PRODUCT_MODEL := Casper VIA M1
+$(call inherit-product, $(SRC_TARGET_DIR)/target/product/languages_small.mk)
+
+PRODUCT_DEVICE       := viam1
+PRODUCT_NAME         := omni_viam1
+PRODUCT_BRAND        := Casper
+PRODUCT_MODEL        := Casper VIA M1
 PRODUCT_MANUFACTURER := casper
-PRODUCT_BOARD := viam1
