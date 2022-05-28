@@ -21,7 +21,6 @@ TARGET_ARCH             := arm64
 TARGET_BOARD_PLATFORM   := mt6753
 TARGET_ARCH_VARIANT     := armv8-a
 TARGET_CPU_ABI          := arm64-v8a
-TARGET_CPU_ABI2         :=
 TARGET_CPU_VARIANT      := cortex-a53
 TARGET_2ND_ARCH         := arm
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
@@ -50,22 +49,13 @@ BOARD_SECOND_OFFSET     := 0x00e88000
 BOARD_TAGS_OFFSET       := 0x0df88000
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 TARGET_PREBUILT_KERNEL  := $(LOCAL_PATH)/prebuilt/$(BOARD_KERNEL_IMAGE_NAME)
-BOARD_MKBOOTIMG_ARGS    += --kernel $(TARGET_PREBUILT_KERNEL)
-BOARD_MKBOOTIMG_ARGS    += --pagesize $(BOARD_KERNEL_PAGESIZE)
-BOARD_MKBOOTIMG_ARGS    += --base $(BOARD_KERNEL_BASE)
-BOARD_MKBOOTIMG_ARGS    += --kernel_offset $(BOARD_KERNEL_OFFSET)
-BOARD_MKBOOTIMG_ARGS    += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
-BOARD_MKBOOTIMG_ARGS    += --second_offset $(BOARD_SECOND_OFFSET)
-BOARD_MKBOOTIMG_ARGS    += --tags_offset $(BOARD_TAGS_OFFSET)
 
 # Logging
 TARGET_USES_LOGD    := true
 TWRP_INCLUDE_LOGCAT := true
 
 # Display & Graphics
-TW_THEME                         := portrait_hdpi
-TW_BRIGHTNESS_PATH               := /sys/class/leds/lcd-backlight/brightness
-RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TW_THEME := portrait_hdpi
 
 # TWRP
 TW_EXCLUDE_SUPERSU := true
