@@ -37,4 +37,4 @@
 /tee1           emmc     /dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/tee1         flags=backup=1;display="TEE"
 /tee2           emmc     /dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/tee2         flags=backup=1;display="TEE Backup"
 /external_sd    vfat     /dev/block/mmcblk1p1                                               flags=backup=0;display="Micro SDcard";storage;wipeingui;removable
-/usbotg         auto     /dev/block/sda1 /dev/block/sda                                     flags=backup=0;display="USB On-The-Go";storage;wipeingui;removable
+/usb_otg        auto     /dev/block/sda1 /dev/block/sda                                     flags=backup=0;display="USB On-The-Go";storage;wipeingui;removable
