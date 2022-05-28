@@ -17,7 +17,7 @@
 # mount point   fstype   device    [device2]
 
 /system         ext4     /dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/system       flags=backup=1;display="System"
-/data           ext4     /dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/userdata     flags=backup=1;display="Data"encryptable=/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/metadata;
+/data           ext4     /dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/userdata     flags=backup=1;display="Data"encryptable=/dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/metadata
 /cache          ext4     /dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/cache        flags=backup=1;display="Cache"
 /protect_f      ext4     /dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/protect1     flags=backup=1;display="Protect"
 /protect_s      ext4     /dev/block/platform/mtk-msdc.0/11230000.msdc0/by-name/protect2     flags=backup=1;subpartitionof=/protect_f
