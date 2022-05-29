@@ -1,71 +1,156 @@
-#
-# Copyright (C) 2022 TeamWin Recovery Project
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
+# mt6753 platform boardconfig
 LOCAL_PATH := device/casper/viam1
 
 # Platform
-TARGET_ARCH             := arm64
-TARGET_BOARD_PLATFORM   := mt6753
-TARGET_ARCH_VARIANT     := armv8-a
-TARGET_CPU_ABI          := arm64-v8a
-TARGET_CPU_ABI2         :=
-TARGET_CPU_VARIANT      := cortex-a53
-TARGET_2ND_ARCH         := arm
+ARCH_ARM_HAVE_TLS_REGISTER := true
+TARGET_BOARD_PLATFORM := mt6753
+TARGET_NO_BOOTLOADER := true
+TARGET_NO_FACTORYIMAGE := true
+
+# CPU
+TARGET_ARCH := arm64
+TARGET_ARCH_VARIANT := armv8-a
+TARGET_CPU_ABI := arm64-v8a
+TARGET_CPU_ABI2 :=
+TARGET_CPU_VARIANT := cortex-a53
+TARGET_CPU_SMP := true
+
+TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
-TARGET_2ND_CPU_ABI      := armeabi-v7a
-TARGET_2ND_CPU_ABI2     := armeabi
-TARGET_2ND_CPU_VARIANT  := cortex-a53
+TARGET_2ND_CPU_ABI := armeabi-v7a
+TARGET_2ND_CPU_ABI2 := armeabi
+TARGET_2ND_CPU_VARIANT := cortex-a53
+TARGET_BOARD_SUFFIX := _64
+TARGET_USES_64_BIT_BINDER := true
 
-# Assert
-TARGET_OTA_ASSERT_DEVICE := viam1,CASPER_VIA_M1
+TARGET_CPU_CORTEX_A53 := true
 
-# Filesystem
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 16777216
-BOARD_FLASH_BLOCK_SIZE             := 131072
-TARGET_USERIMAGES_USE_EXT4         := true
-RECOVERY_SDCARD_ON_DATA            := true
-BOARD_HAS_LARGE_FILESYSTEM         := true
-TW_INCLUDE_CRYPTO                  := true
+TARGET_BOOTLOADER_BOARD_NAME := mt6735
+
+TARGET_USES_NON_TREBLE_CAMERA := true
 
 # Kernel
-TARGET_KERNEL_SOURCE                      := kernel/casper/viam1
-TARGET_KERNEL_CONFIG                      := viam1_defconfig
-TARGET_KERNEL_CROSS_COMPILE_PREFIX        := aarch64-linux-android-
-BOARD_CUSTOM_BOOTIMG_MK                   := $(LOCAL_PATH)/mkbootimg.mk
-BOARD_KERNEL_CMDLINE                      := bootopt=64S3,32N2,64N2
-BOARD_KERNEL_PAGESIZE                     := 2048
-BOARD_KERNEL_BASE                         := 0x40078000
-BOARD_KERNEL_OFFSET                       := 0x00008000
-BOARD_RAMDISK_OFFSET                      := 0x03f88000
-BOARD_SECOND_OFFSET                       := 0x00e88000
-BOARD_TAGS_OFFSET                         := 0x0df88000
-BOARD_KERNEL_IMAGE_NAME                   := Image.gz-dtb
-BOARD_MKBOOTIMG_ARGS                      += --pagesize $(BOARD_KERNEL_PAGESIZE)
-BOARD_MKBOOTIMG_ARGS                      += --base $(BOARD_KERNEL_BASE)
-BOARD_MKBOOTIMG_ARGS                      += --kernel_offset $(BOARD_KERNEL_OFFSET)
-BOARD_MKBOOTIMG_ARGS                      += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
-BOARD_MKBOOTIMG_ARGS                      += --second_offset $(BOARD_SECOND_OFFSET)
-BOARD_MKBOOTIMG_ARGS                      += --tags_offset $(BOARD_TAGS_OFFSET)
+TARGET_USES_64_BIT_BINDER := true
+TARGET_IS_64_BIT := true
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
+BOARD_KERNEL_BASE := 0x40078000
+BOARD_KERNEL_PAGESIZE := 2048
+BOARD_MKBOOTIMG_ARGS := --base 0x40078000 --pagesize 2048 --kernel_offset 0x00008000 --ramdisk_offset 0x03f88000 --second_offset 0x00e88000 --tags_offset 0x0df88000 --board 1479347649
+TARGET_KERNEL_SOURCE := kernel/casper/viam1
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_HEADER_ARCH := arm64
+TARGET_KERNEL_CONFIG := viam1_defconfig
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+MTK_APPENDED_DTB_SUPPORT := yes
+BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
+LZMA_RAMDISK_TARGETS := boot,recovery
+BOARD_USES_FULL_RECOVERY_IMAGE := true
 
-# Logging
-TARGET_USES_LOGD    := true
-TWRP_INCLUDE_LOGCAT := true
+# Partitions
+BOARD_BOOTIMAGE_PARTITION_SIZE := 20971520
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 20971520
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1610612736
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 13474725888
+BOARD_CACHEIMAGE_PARTITION_SIZE := 402653184
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_FLASH_BLOCK_SIZE := 131072
 
-# Display & Graphics
-TW_THEME := portrait_hdpi
+BOARD_HAS_LARGE_FILESYSTEM := true
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
 
-# TWRP
-TW_EXCLUDE_SUPERSU := true
+# Include needed symbols
+TARGET_INCLUDE_XLOG_SYMBOLS := true
+TARGET_INCLUDE_AUDIO_SYMBOLS := true
+TARGET_INCLUDE_UI_SYMBOLS := true
+TARGET_INCLUDE_GUI_SYMBOLS := true
+TARGET_INCLUDE_CAMERA_SYMBOLS := true
+include vendor/mad/config/symbols.mk
+
+# Display
+TARGET_SCREEN_HEIGHT := 1920
+TARGET_SCREEN_WIDTH := 1080
+
+# Bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
+
+# LightHAL
+TARGET_PROVIDES_LIBLIGHT := true
+
+# Recovery
+BOARD_HAS_NO_SELECT_BUTTON := true
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/fstab.mt6735
+
+# TWRP-specific
+ifeq ($(RECOVERY_VARIANT), twrp)
+DEVICE_RESOLUTION := 1080x1920
+DEVICE_SCREEN_WIDTH := 1080
+DEVICE_SCREEN_HEIGHT := 1920
+RECOVERY_SDCARD_ON_DATA := true
+TW_INTERNAL_STORAGE_PATH := "/data/media"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+TW_DEFAULT_EXTERNAL_STORAGE := true
+endif
+
+TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
+
+# SELinux
+BOARD_SEPOLICY_DIRS += $(LOCAL_PATH)/sepolicy
+
+# MTK Hardware
+BOARD_HAS_MTK_HARDWARE := true
+
+# Display
+USE_OPENGL_RENDERER := true
+TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
+NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
+
+# HWC2 by default
+TARGET_USES_HWC2 := true
+VSYNC_EVENT_PHASE_OFFSET_NS := -8000000
+SF_VSYNC_EVENT_PHASE_OFFSET_NS := -8000000
+PRESENT_TIME_OFFSET_FROM_VSYNC_NS := 0
+
+BOARD_EGL_CFG := $(LOCAL_PATH)/configs/egl.cfg
+
+# Vold
+TARGET_KERNEL_HAVE_EXFAT := true
+
+# Audio
+USE_XML_AUDIO_POLICY_CONF := 1
+
+# Wifi
+BOARD_WLAN_DEVICE := MediaTek
+WPA_SUPPLICANT_VERSION := VER_0_8_X
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_mt66xx
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_mt66xx
+WIFI_DRIVER_FW_PATH_PARAM := "/dev/wmtWifi"
+WIFI_DRIVER_FW_PATH_STA := STA
+WIFI_DRIVER_FW_PATH_AP := AP
+WIFI_DRIVER_FW_PATH_P2P := P2P
+
+WIFI_DRIVER_STATE_CTRL_PARAM	 := "/dev/wmtWifi"
+WIFI_DRIVER_STATE_ON		 := 1
+WIFI_DRIVER_STATE_OFF		 := 0
+
+# Bluetooth
+BOARD_HAVE_BLUETOOTH := true
+
+# Charger
+BACKLIGHT_PATH := /sys/class/leds/lcd-backlight/brightness
+
+# Recovery
+BOARD_RECOVERY_SWIPE := true
+BOARD_SUPPRESS_EMMC_WIPE := true
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBA_8888"
+
+# DEXPREOPT
+ifneq ($(TARGET_BUILD_VARIANT),user)
+WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
+endif
