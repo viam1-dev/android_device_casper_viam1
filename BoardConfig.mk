@@ -65,7 +65,29 @@ TARGET_INCLUDE_AUDIO_SYMBOLS := true
 TARGET_INCLUDE_UI_SYMBOLS := true
 TARGET_INCLUDE_GUI_SYMBOLS := true
 TARGET_INCLUDE_CAMERA_SYMBOLS := true
-include vendor/mad/config/symbols.mk
+
+# Include symbols
+ifeq ($(TARGET_INCLUDE_XLOG_SYMBOLS),true)
+LINKER_FORCED_SHIM_LIBS := /system/lib/liblog.so|libmtkshim_log.so:/system/lib64/liblog.so|libmtkshim_log.so
+endif
+ifeq ($(TARGET_INCLUDE_AUDIO_SYMBOLS),true)
+LINKER_FORCED_SHIM_LIBS := $(LINKER_FORCED_SHIM_LIBS):/system/vendor/lib/hw/audio.primary.$(TARGET_BOARD_PLATFORM).so|libmtkshim_audio.so:/system/vendor/lib64/hw/audio.primary.$(TARGET_BOARD_PLATFORM).so|libmtkshim_audio.so
+endif
+ifeq ($(TARGET_INCLUDE_UI_SYMBOLS),true)
+LINKER_FORCED_SHIM_LIBS := $(LINKER_FORCED_SHIM_LIBS):/system/lib/libui.so|libmtkshim_ui.so:/system/lib64/libui.so|libmtkshim_ui.so
+endif
+ifeq ($(TARGET_INCLUDE_GUI_SYMBOLS),true)
+LINKER_FORCED_SHIM_LIBS := $(LINKER_FORCED_SHIM_LIBS):/system/lib/libgui.so|libmtkshim_gui.so:/system/lib64/libgui.so|libmtkshim_gui.so
+endif
+ifeq ($(TARGET_INCLUDE_OMX_SYMBOLS),true)
+LINKER_FORCED_SHIM_LIBS := $(LINKER_FORCED_SHIM_LIBS):/system/vendor/lib/libMtkOmxVdec.so|libmtkshim_omx.so
+endif
+ifeq ($(TARGET_INCLUDE_GPS_SYMBOLS),true)
+LINKER_FORCED_SHIM_LIBS := $(LINKER_FORCED_SHIM_LIBS):/system/vendor/bin/mtk_agpsd|libmtkshim_gps.so
+endif
+ifeq ($(TARGET_INCLUDE_CAMERA_SYMBOLS),true)
+LINKER_FORCED_SHIM_LIBS := $(LINKER_FORCED_SHIM_LIBS):/system/vendor/lib/libfeatureio.so|libmtkshim_camera.so:/system/vendor/lib64/libfeatureio.so|libmtkshim_camera.so:/system/vendor/lib/libcam.camnode.so|libmtkshim_camera.so:/system/vendor/lib64/libcam.camnode.so|libmtkshim_camera.so
+endif
 
 # Display
 TARGET_SCREEN_HEIGHT := 1920
@@ -80,19 +102,6 @@ TARGET_PROVIDES_LIBLIGHT := true
 # Recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/fstab.mt6735
-
-# TWRP-specific
-ifeq ($(RECOVERY_VARIANT), twrp)
-DEVICE_RESOLUTION := 1080x1920
-DEVICE_SCREEN_WIDTH := 1080
-DEVICE_SCREEN_HEIGHT := 1920
-RECOVERY_SDCARD_ON_DATA := true
-TW_INTERNAL_STORAGE_PATH := "/data/media"
-TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
-TW_EXTERNAL_STORAGE_PATH := "/external_sd"
-TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
-TW_DEFAULT_EXTERNAL_STORAGE := true
-endif
 
 TARGET_SYSTEM_PROP := $(LOCAL_PATH)/system.prop
 
