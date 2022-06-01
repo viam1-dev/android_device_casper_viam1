@@ -69,3 +69,4 @@ TW_THEME := portrait_hdpi
 
 # TWRP
 TW_EXCLUDE_SUPERSU := true
+TW_EXCLUDE_PYTHON  := true
