@@ -44,7 +44,7 @@ TW_INCLUDE_CRYPTO                  := true
 TARGET_KERNEL_SOURCE               := kernel/casper/viam1
 TARGET_KERNEL_CONFIG               := viam1_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-BOARD_NEEDS_LZMA_MINIGZIP          := true
+BOARD_CUSTOM_BOOTIMG_MK            := $(LOCAL_PATH)/mkbootimg.mk
 BOARD_KERNEL_CMDLINE               := bootopt=64S3,32N2,64N2
 BOARD_KERNEL_PAGESIZE              := 2048
 BOARD_KERNEL_BASE                  := 0x40078000
