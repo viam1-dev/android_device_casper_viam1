@@ -9,9 +9,7 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Installing build Dependencies
+      - name: Installing build dependencies
         run: |
           sudo apt-get update
           sudo apt-get install zip gcc-multilib g++-multilib \
@@ -39,7 +37,7 @@ jobs:
           export LC_ALL=C
           lunch omni_viam1-eng
           repo sync -c --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all)
-          make -j$(nproc --all) recoveryimage
+          mka recoveryimage
 
       - name: Uploading TWRP builds
         uses: actions/upload-artifact@v2
@@ -52,9 +50,7 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Installing build Dependencies
+      - name: Installing build dependencies
         run: |
           sudo apt-get update
           sudo apt-get install zip gcc-multilib g++-multilib \
